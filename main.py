@@ -2,6 +2,9 @@ from __future__ import division
 from collections import Counter
 from codecs import open
 
+NEG_WORD_COUNT = Counter()
+POS_WORD_COUNT = Counter()
+
 """
 Task 0: We first remove the document identifier, and also the topic label, which you don't need. 
 Then,split the data into a training and an evaluation part. 
@@ -30,8 +33,7 @@ def train_nb(documents, labels):
             neg_word_count.update(c[1])
         else:
             pos_word_count.update(c[1])
-    print(len(documents))
-    print(len(neg_word_count) + len(pos_word_count))
+    return neg_word_count, pos_word_count
 
 all_docs, all_labels = read_documents('all_sentiment_shuffled.txt')
 
@@ -41,4 +43,4 @@ train_labels = all_labels[:split_point]
 eval_docs = all_docs[split_point:]
 eval_labels = all_labels[split_point:]
 
-train_nb(train_docs,train_labels)
+NEG_WORD_COUNT, POS_WORD_COUNT = train_nb(train_docs, train_labels)
