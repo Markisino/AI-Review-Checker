@@ -83,13 +83,28 @@ def classify_nb(document):
     out = str()
 
     if negProb > posProb:
-        out = "NEG"
+        out = "neg"
 
     else:
-        out = "POS"
+        out = "pos"
 
     return out
 
+"""
+Task 3: Evaluating the classifier
+"""
+def classify_documents(docs):
+    predictions = []
+    for document in docs:
+        result = classify_nb(document)
+        predictions.append(result)
+    return predictions
+def compute_accuracy(predictions,labels):
+    correct = 0
+    for x in range(len(predictions)):
+        if(predictions[x] == labels[x]):
+            correct += 1
+    return correct/len(predictions)
 """
 MAIN
 """
@@ -107,3 +122,5 @@ NEG_TOTAL_WORD, POS_TOTAL_WORD, TOTAL_WORD_SUM, NEG_WORD_COUNT, POS_WORD_COUNT =
 
 
 print(classify_nb(eval_docs[2]))
+print("Evaluate set accuracy : " + str(compute_accuracy(classify_documents(eval_docs),eval_labels)))
+print("Training set accuracy : " + str(compute_accuracy(classify_documents(train_docs),train_labels)))
