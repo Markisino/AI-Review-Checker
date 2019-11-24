@@ -64,7 +64,7 @@ showstringspaces=false            %
     \section{Introduction}
     This project is completed within the COMP 472 course. It aims is to create an unsupervised machine learning program that will take some people feedback on various items they purchased and to classify it in two different group: Positive review or negative review. We used 80\% of the data collected to train our machine, and the remaining 20\% to test our machine. The analysis of each task of the project are shown in different section.
     \section{Task 1 Analysis}
-    For the task 1, we created a function called \pythoninline{def train_nb(documents, labels)}, it takes two parament which are the \pythoninline{documents} and the \pythoninline{labels} to train our machine. We also import the \pythoninline{Counter} from the \pythoninline{collections} modules as well to help us to count the number of occurence of each word.
+    For the task 1, we created a function called \pythoninline{def train_nb(documents, labels)}, it takes two parament which are the \pythoninline{documents} and the \pythoninline{labels} to train our machine. We also import the \pythoninline{Counter} from the \pythoninline{collections} modules as well to help us to count the number of occurence of each word. We separate the occurence of word in negative review from the occurence in positive review by using the labels already there to teach 
     \begin{python}
 def train_nb(documents, labels):
 neg_word_count = Counter()
