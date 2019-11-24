@@ -84,10 +84,10 @@ def classify_nb(document, smoothing=0.5):
 """
 Task 3: Evaluating the classifier
 """
-def classify_documents(docs):
+def classify_documents(docs, smoothing = 0.5):
     predictions = []
     for document in docs:
-        result = classify_nb(document)
+        result = classify_nb(document,smoothing)
         predictions.append(result)
     return predictions
 def compute_accuracy(predictions,labels):
@@ -112,5 +112,22 @@ NEG_TOTAL_WORD, POS_TOTAL_WORD, TOTAL_WORD_SUM, NEG_WORD_COUNT, POS_WORD_COUNT =
 ### END INIT ###
 
 
-print("Evaluate set accuracy : " + str(compute_accuracy(classify_documents(eval_docs),eval_labels)))
-print("Training set accuracy : " + str(compute_accuracy(classify_documents(train_docs),train_labels)))
+#print("Evaluate set accuracy (no smoothing) : " + str(compute_accuracy(classify_documents(eval_docs,smoothing=0),eval_labels)))
+#print("Training set accuracy (no smoothing) : " + str(compute_accuracy(classify_documents(train_docs,smoothing=0),train_labels)))
+#print("Evaluate set accuracy (0.5) : " + str(compute_accuracy(classify_documents(eval_docs, smoothing = 0.5),eval_labels)))
+#print("Training set accuracy (0.5) : " + str(compute_accuracy(classify_documents(train_docs,smoothing = 0.5),train_labels)))
+import operator
+smoothing_old = 0
+eval_acc_old = compute_accuracy(classify_documents(eval_docs, smoothing = smoothing_old),eval_labels)
+eval_acc_new = 1
+
+smoothing_values = {}
+
+while(smoothing_old < 10):
+    smoothing_new = smoothing_old + 0.01
+    eval_acc_new = compute_accuracy(classify_documents(eval_docs, smoothing = smoothing_new),eval_labels)
+    eval_acc_old = eval_acc_new
+    smoothing_old = smoothing_new
+    smoothing_values[(smoothing_new)] = eval_acc_new
+best_x = (max(smoothing_values.items(), key = operator.itemgetter(1))[0])
+print("max acc at smoothing value " + str(best_x) + ": " + str(smoothing_values[best_x]) )
