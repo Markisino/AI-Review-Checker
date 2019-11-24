@@ -53,42 +53,30 @@ Task 2: Classifying new document
 """
 
 
-def score_doc_label(document):
-
+def score_doc_label(document, smoothing=0.5):
     negProb = np.log10(NEG_TOTAL_WORD / TOTAL_WORD_SUM)
     posProb = np.log10(POS_TOTAL_WORD / TOTAL_WORD_SUM)
 
     for word in document:
-
-        # Infinity checker
-        if NEG_WORD_COUNT[word] == 0:
-            negProb = -np.Inf
-
-        if POS_WORD_COUNT[word] == 0:
-            posProb = -np.Inf
-
-        # Add if log10 if not infinity
-        if negProb != -np.inf:
-            negProb += np.log10(NEG_WORD_COUNT[word] / NEG_TOTAL_WORD)
-
-        if posProb != -np.inf:
-            posProb += np.log10(POS_WORD_COUNT[word] / POS_TOTAL_WORD)
+        negProb += np.log10((NEG_WORD_COUNT[word] + smoothing) / NEG_TOTAL_WORD)
+        posProb += np.log10((POS_WORD_COUNT[word] + smoothing) / POS_TOTAL_WORD)
 
     return np.exp(negProb), np.exp(posProb)
 
-def classify_nb(document):
 
-    negProb, posProb = score_doc_label(document)
+def classify_nb(document, smoothing=0.5):
+    negProb, posProb = score_doc_label(document, smoothing)
 
     out = str()
 
     if negProb > posProb:
-        out = "NEG"
+        out = "neg"
 
     else:
-        out = "POS"
+        out = "pos"
 
     return out
+
 
 """
 MAIN
@@ -106,4 +94,4 @@ NEG_TOTAL_WORD, POS_TOTAL_WORD, TOTAL_WORD_SUM, NEG_WORD_COUNT, POS_WORD_COUNT =
 ### END INIT ###
 
 
-print(classify_nb(eval_docs[2]))
+print(classify_nb(eval_docs[3]))
