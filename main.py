@@ -53,32 +53,22 @@ Task 2: Classifying new document
 """
 
 
-def score_doc_label(document):
-
+def score_doc_label(document, smoothing=0.5):
     negProb = np.log10(NEG_TOTAL_WORD / TOTAL_WORD_SUM)
     posProb = np.log10(POS_TOTAL_WORD / TOTAL_WORD_SUM)
 
+    smoothNegTotal = NEG_TOTAL_WORD + 0.5 * (len(NEG_WORD_COUNT))
+    smoothPosTotal = POS_TOTAL_WORD + 0.5 * (len(POS_WORD_COUNT))
+
     for word in document:
-
-        # Infinity checker
-        if NEG_WORD_COUNT[word] == 0:
-            negProb = -np.Inf
-
-        if POS_WORD_COUNT[word] == 0:
-            posProb = -np.Inf
-
-        # Add if log10 if not infinity
-        if negProb != -np.inf:
-            negProb += np.log10(NEG_WORD_COUNT[word] / NEG_TOTAL_WORD)
-
-        if posProb != -np.inf:
-            posProb += np.log10(POS_WORD_COUNT[word] / POS_TOTAL_WORD)
+        negProb += np.log10((NEG_WORD_COUNT[word] + smoothing) / smoothNegTotal)
+        posProb += np.log10((POS_WORD_COUNT[word] + smoothing) / smoothPosTotal)
 
     return np.exp(negProb), np.exp(posProb)
 
-def classify_nb(document):
 
-    negProb, posProb = score_doc_label(document)
+def classify_nb(document, smoothing=0.5):
+    negProb, posProb = score_doc_label(document, smoothing)
 
     out = str()
 
@@ -89,6 +79,7 @@ def classify_nb(document):
         out = "pos"
 
     return out
+
 
 """
 Task 3: Evaluating the classifier
@@ -121,6 +112,5 @@ NEG_TOTAL_WORD, POS_TOTAL_WORD, TOTAL_WORD_SUM, NEG_WORD_COUNT, POS_WORD_COUNT =
 ### END INIT ###
 
 
-print(classify_nb(eval_docs[2]))
 print("Evaluate set accuracy : " + str(compute_accuracy(classify_documents(eval_docs),eval_labels)))
 print("Training set accuracy : " + str(compute_accuracy(classify_documents(train_docs),train_labels)))

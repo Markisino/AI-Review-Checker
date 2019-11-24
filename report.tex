@@ -1,5 +1,9 @@
 \documentclass[runningheads]{llncs}
 
+% Default fixed font does not support bold face
+\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{10} % for bold
+\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{10}  % for normal
+
 \usepackage{xcolor}
 \usepackage{listings}
 \usepackage{hyperref}
@@ -8,7 +12,10 @@
 \usepackage{amsmath}
 \usepackage{float}
 
-\definecolor{light-gray}{gray}{0.95}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+
 \hypersetup{
     colorlinks,
     citecolor=black,
@@ -16,6 +23,36 @@
     linkcolor=black,
     urlcolor=black
 }
+
+% Python style for highlighting
+\newcommand\pythonstyle{\lstset{
+language=Python,
+basicstyle=\ttm,
+otherkeywords={self},             % Add keywords here
+keywordstyle=\ttb\color{deepblue},
+emph={MyClass,__init__},          % Custom highlighting
+emphstyle=\ttb\color{deepred},    % Custom highlighting style
+stringstyle=\color{deepgreen},
+frame=tb,                         % Any extra options here
+showstringspaces=false            % 
+}}
+
+% Python environment
+\lstnewenvironment{python}[1][]
+{
+\pythonstyle
+\lstset{#1}
+}
+{}
+
+% Python for external files
+\newcommand\pythonexternal[2][]{{
+\pythonstyle
+\lstinputlisting[#1]{#2}}}
+
+% Python for inline
+\newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
+
 \title{COMP472 - Reports}
 \author{Thomas Backs\inst{1} \and Marco Tropiano\inst{2}\and Earl Aromin Steven\inst{3}}
 \authorrunning{T. Backs, M. Tropiano \& E. Armoin}
@@ -24,7 +61,31 @@
 \begin{document}
     \maketitle
 
+    \section{Introduction}
+    This project is completed within the COMP 472 course. It aims is to create an unsupervised machine learning program that will take some people feedback on various items they purchased and to classify it in two different group: Positive review or negative review. We used 80\% of the data collected to train our machine, and the remaining 20\% to test our machine. The analysis of each task of the project are shown in different section.
     \section{Task 1 Analysis}
+    For the task 1, we created a function called \pythoninline{def train_nb(documents, labels)}, it takes two parament which are the \pythoninline{documents} and the \pythoninline{labels} to train our machine. We also import the \pythoninline{Counter} from the \pythoninline{collections} modules as well to help us to count the number of occurence of each word. We separate the occurence of word in negative review from the occurence in positive review by using the labels already there to teach 
+    \begin{python}
+def train_nb(documents, labels):
+neg_word_count = Counter()
+pos_word_count = Counter()
+neg_total_word = 0
+pos_total_word = 0
+# we now create our classification
+classifier = list(zip(labels, documents))
+for c in classifier:
+    if c[0] == 'neg':
+        neg_word_count.update(c[1])
+    else:
+        pos_word_count.update(c[1])
+
+neg_total_word = sum(neg_word_count.values())
+pos_total_word = sum(pos_word_count.values())
+total_word = sum(neg_total_word, pos_total_word)
+return neg_total_word, pos_total_word, 
+    total_word, neg_word_count, pos_word_count
+    \end{python}
+
     % Estimating parameters for the Naive Bayes Classifier.
     \section{Task 2 Analysis}
     % Classifying  new  documents.Give  a  table  of results showing the accuracy for each class. Analyze and discuss these results
