@@ -57,9 +57,12 @@ def score_doc_label(document, smoothing=0.5):
     negProb = np.log10(NEG_TOTAL_WORD / TOTAL_WORD_SUM)
     posProb = np.log10(POS_TOTAL_WORD / TOTAL_WORD_SUM)
 
+    smoothNegTotal = 0.5 * (len(NEG_WORD_COUNT))
+    smoothPosTotal = 0.5 * (len(POS_WORD_COUNT))
+
     for word in document:
-        negProb += np.log10((NEG_WORD_COUNT[word] + smoothing) / NEG_TOTAL_WORD)
-        posProb += np.log10((POS_WORD_COUNT[word] + smoothing) / POS_TOTAL_WORD)
+        negProb += np.log10((NEG_WORD_COUNT[word] + smoothing) / smoothNegTotal)
+        posProb += np.log10((POS_WORD_COUNT[word] + smoothing) / smoothPosTotal)
 
     return np.exp(negProb), np.exp(posProb)
 
