@@ -89,6 +89,22 @@ return neg_total_word, pos_total_word,
     % Estimating parameters for the Naive Bayes Classifier.
     \section{Task 2 Analysis}
     % Classifying  new  documents.Give  a  table  of results showing the accuracy for each class. Analyze and discuss these results
+    The task 2 is seperate in two part, where the first part is to get the score and the second part compares the scores we got and return the appropriate classification (negative or positive review).
+
+    The function called \pythoninline{score_doc_label(document, smoothing=0.5)}. \\The smoothing paramater is set to default which is 0.5 and can be modified in the function call to suit future need. We use this formula to find our probabilty:
+    $$
+    \begin{aligned}
+        score(\text{Negative}) &= \log_{10}(P(\text{Negative})) + \sum_{i=1}(P(w_i|\text{Negative})) \\
+        score(\text{Positive}) &= \log_{10}(P(\text{Positive})) + \sum_{i=1}(P(w_i|\text{Positive})) 
+    \end{aligned}
+    $$
+    Then we take the scores from our formula calcuation above, and we return the exponential of positive and negative scores to make it easier to read:
+    $$
+        e^{\text{score(\text{Negative})}} \text{ and } e^{\text{score(\text{Positive})}}
+    $$
+    
+    Now this takes us to the part of of the task 2, to perform our probabilities calculation, we call the function called \pythoninline{classify_nb(document, smoothing=0.5)}, this function will call the function previously mentionned in the first part, and will get the return values of the scores for negative and positive probability. It will compares both scores, pick the highest one and will return the fitting label for our review. 
+    
     \section{Issues}
     
     \section{What would you expand}
