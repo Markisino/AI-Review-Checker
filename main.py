@@ -65,7 +65,7 @@ def score_doc_label(document, smoothing=0.5):
         negProb += np.log10((NEG_WORD_COUNT[word] + smoothing) / smoothNegTotal)
         posProb += np.log10((POS_WORD_COUNT[word] + smoothing) / smoothPosTotal)
 
-    return np.exp(negProb), np.exp(posProb)
+    return negProb, posProb
 
 
 def classify_nb(document, smoothing=0.5):
@@ -98,23 +98,33 @@ def compute_accuracy(predictions, labels):
     total_pos = 0
     correct_neg = 0
     total_neg = 0
+    error_indexes = []
     for x in range(len(predictions)):
         if predictions[x] == 'pos':
             total_pos += 1
             if(predictions[x] == labels[x]):
                 correct += 1
                 correct_pos += 1
+            else:
+                error_indexes.append(x)
         elif predictions[x] == 'neg':
             total_neg += 1
             if(predictions[x] == labels[x]):
                 correct += 1
                 correct_neg += 1
+            else:
+                error_indexes.append(x)
+
+
 
     overall_accuracy = correct/len(predictions)
     pos_accuracy = correct_pos/total_pos
     neg_accuracy = correct_neg/total_neg
-    return overall_accuracy, pos_accuracy, neg_accuracy
+    return overall_accuracy, pos_accuracy, neg_accuracy, error_indexes
 
+def misclassified_document(evaluation_docs, evaluation_labels, error_indexes):
+    for x in error_indexes:
+        print('{}: {}'.format(evaluation_labels[x], evaluation_docs[x]), file=open('data.txt', 'a'))
 """
 MAIN
 """
@@ -133,7 +143,8 @@ NEG_TOTAL_WORD, POS_TOTAL_WORD, TOTAL_WORD_SUM, NEG_WORD_COUNT, POS_WORD_COUNT =
 #print("Training set accuracy (no smoothing) : " + str(compute_accuracy(classify_documents(train_docs,smoothing=0),train_labels)))
 #print("Evaluate set accuracy (0.5) : " + str(compute_accuracy(classify_documents(eval_docs, smoothing = 0.5),eval_labels)))
 
-overall, pos, neg = compute_accuracy(classify_documents(train_docs, smoothing=0.5), train_labels)
+overall, pos, neg, err_index = compute_accuracy(classify_documents(eval_docs, smoothing=0.5), train_labels)
+misclassified_document(eval_docs, eval_labels, err_index)
 print("Training set accuracy (0.5) : \n\t" + "Overall accuracy : "+str(overall) + "\n\tPos accuracy : " + str(pos) + "\n\tNeg accuracy : " + str(neg))
 smoothing_old = 0
 eval_acc_old = compute_accuracy(classify_documents(eval_docs, smoothing=smoothing_old), eval_labels)[0]
@@ -141,14 +152,14 @@ eval_acc_new = 1
 
 smoothing_values = {}
 
-while(smoothing_old < 1):
-    smoothing_new = smoothing_old + 0.01
-    eval_acc_new,new_pos,new_neg = compute_accuracy(classify_documents(eval_docs, smoothing = smoothing_new),eval_labels)
-    eval_acc_old = eval_acc_new
-    smoothing_old = smoothing_new
-    smoothing_values[(smoothing_new)] = eval_acc_new
-    print("Smoothing " + str(smoothing_new) + ": ")
-    print("\toverall \t" + str(eval_acc_new))
-    print("\tpos \t\t" + str(new_pos))
-    print("\tneg \t\t" + str(new_neg))
-    print('Smoothing' + str(smoothing_new) + ": " + str(eval_acc_new) + ': ' + str(new_pos) + ': '+ str(new_neg), file=open('data.txt', 'a'))
+# while(smoothing_old < 1):
+#     smoothing_new = smoothing_old + 0.01
+#     eval_acc_new,new_pos,new_neg = compute_accuracy(classify_documents(eval_docs, smoothing = smoothing_new),eval_labels)
+#     eval_acc_old = eval_acc_new
+#     smoothing_old = smoothing_new
+#     smoothing_values[(smoothing_new)] = eval_acc_new
+#     print("Smoothing " + str(smoothing_new) + ": ")
+#     print("\toverall \t" + str(eval_acc_new))
+#     print("\tpos \t\t" + str(new_pos))
+#     print("\tneg \t\t" + str(new_neg))
+#     print('Smoothing' + str(smoothing_new) + ": " + str(eval_acc_new) + ': ' + str(new_pos) + ': '+ str(new_neg))
