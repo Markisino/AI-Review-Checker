@@ -104,9 +104,25 @@ return neg_total_word, pos_total_word,
     $$
     
     Now this takes us to the part of of the task 2, to perform our probabilities calculation, we call the function called \pythoninline{classify_nb(document, smoothing=0.5)}, this function will call the function previously mentionned in the first part, and will get the return values of the scores for negative and positive probability. It will compares both scores, pick the highest one and will return the fitting label for our review. 
+    \newpage
+    \section{Accuracy Analysis}
+    We use the 0.5 smoothing for our training data and we end up with this result shown below:\\
+    \newline
+    \texttt{Training set accuracy (0.5) : \\
+	\indent Overall accuracy : 0.8712621970412339\\
+	\indent Pos accuracy : 0.8429329291398256\\
+    \indent Neg accuracy : 0.906418998354103}\\
+    
+    The data above show the accuracy of our training data with a smoothing of 0.5. Below there is more datas and graphs based on the evaluation (test) data we have. The first graph show are the overall accuracy based on different smoothing values between 0.1 and 1. \\
+    \texttt{max overall acc at smoothing value 0.97: 0.767}
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[scale=0.5]{smoothing-average.png}
+    \end{figure}
     
     \section{Issues}
-    
+    \textcolor{red}{Issues encountered...}
     \section{What would you expand}
+    \textcolor{red}{Waht would we expand...}
 
 \end{document}

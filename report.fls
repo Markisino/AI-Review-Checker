@@ -151,6 +151,10 @@ INPUT /usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
 INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
+INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
+INPUT /home/noax/Documents/GitHub/comp472-project2/smoothing-average.png
+INPUT /home/noax/Documents/GitHub/comp472-project2/smoothing-average.png
+INPUT /home/noax/Documents/GitHub/comp472-project2/smoothing-average.png
 INPUT /home/noax/Documents/GitHub/comp472-project2/report.aux
 INPUT /home/noax/Documents/GitHub/comp472-project2/report.out
 INPUT /home/noax/Documents/GitHub/comp472-project2/report.out
@@ -164,5 +168,6 @@ INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb
+INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/txfonts/t1xbtt.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb

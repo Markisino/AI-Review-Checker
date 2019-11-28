@@ -2,6 +2,7 @@ from __future__ import division
 from collections import Counter
 from codecs import open
 import numpy as np
+import operator
 
 NEG_WORD_COUNT = Counter()
 POS_WORD_COUNT = Counter()
@@ -84,15 +85,16 @@ def classify_nb(document, smoothing=0.5):
 """
 Task 3: Evaluating the classifier
 """
-def classify_documents(docs, smoothing = 0.5):
+def classify_documents(docs, smoothing=0.5):
     predictions = []
     for document in docs:
-        result = classify_nb(document,smoothing)
+        result = classify_nb(document, smoothing)
         predictions.append(result)
     return predictions
-def compute_accuracy(predictions,labels):
+
+def compute_accuracy(predictions, labels):
     correct = 0
-    correct_pos= 0
+    correct_pos = 0
     total_pos = 0
     correct_neg = 0
     total_neg = 0
@@ -112,10 +114,10 @@ def compute_accuracy(predictions,labels):
     pos_accuracy = correct_pos/total_pos
     neg_accuracy = correct_neg/total_neg
     return overall_accuracy, pos_accuracy, neg_accuracy
+
 """
 MAIN
 """
-
 ### START INIT ###
 all_docs, all_labels = read_documents('all_sentiment_shuffled.txt')
 split_point = int(0.80 * len(all_docs))
@@ -127,28 +129,26 @@ eval_labels = all_labels[split_point:]
 NEG_TOTAL_WORD, POS_TOTAL_WORD, TOTAL_WORD_SUM, NEG_WORD_COUNT, POS_WORD_COUNT = train_nb(train_docs, train_labels)
 ### END INIT ###
 
-
 #print("Evaluate set accuracy (no smoothing) : " + str(compute_accuracy(classify_documents(eval_docs,smoothing=0),eval_labels)))
 #print("Training set accuracy (no smoothing) : " + str(compute_accuracy(classify_documents(train_docs,smoothing=0),train_labels)))
 #print("Evaluate set accuracy (0.5) : " + str(compute_accuracy(classify_documents(eval_docs, smoothing = 0.5),eval_labels)))
-overall, pos, neg = compute_accuracy(classify_documents(train_docs,smoothing = 0.5),train_labels)
-print("Training set accuracy (0.5) : \n\t" 
-    + "Overall accuracy : "+str(overall)
-    + "\n\tPos accuracy : " + str(pos)
-    + "\n\tNeg accuracy : " + str(neg))
-import operator
+
+overall, pos, neg = compute_accuracy(classify_documents(train_docs, smoothing=0.5), train_labels)
+print("Training set accuracy (0.5) : \n\t" + "Overall accuracy : "+str(overall) + "\n\tPos accuracy : " + str(pos) + "\n\tNeg accuracy : " + str(neg))
 smoothing_old = 0
-eval_acc_old = compute_accuracy(classify_documents(eval_docs, smoothing = smoothing_old),eval_labels)[0]
+eval_acc_old = compute_accuracy(classify_documents(eval_docs, smoothing=smoothing_old), eval_labels)[0]
 eval_acc_new = 1
 
 smoothing_values = {}
 
-while(smoothing_old < 10):
+while(smoothing_old < 1):
     smoothing_new = smoothing_old + 0.01
-    eval_acc_new = compute_accuracy(classify_documents(eval_docs, smoothing = smoothing_new),eval_labels)[0]
+    eval_acc_new,new_pos,new_neg = compute_accuracy(classify_documents(eval_docs, smoothing = smoothing_new),eval_labels)
     eval_acc_old = eval_acc_new
     smoothing_old = smoothing_new
     smoothing_values[(smoothing_new)] = eval_acc_new
-    print("Smoothing " + str(smoothing_new) + ": " + str(eval_acc_new) )
-best_x = (max(smoothing_values.items(), key = operator.itemgetter(1))[0])
-print("max overall acc at smoothing value " + str(best_x) + ": " + str(smoothing_values[best_x]) )
+    print("Smoothing " + str(smoothing_new) + ": ")
+    print("\toverall \t" + str(eval_acc_new))
+    print("\tpos \t\t" + str(new_pos))
+    print("\tneg \t\t" + str(new_neg))
+    print('Smoothing' + str(smoothing_new) + ": " + str(eval_acc_new) + ': ' + str(new_pos) + ': '+ str(new_neg), file=open('data.txt', 'a'))
