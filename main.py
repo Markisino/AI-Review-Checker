@@ -58,8 +58,8 @@ def score_doc_label(document, smoothing=0.5):
     negProb = np.log10(NEG_TOTAL_WORD / TOTAL_WORD_SUM)
     posProb = np.log10(POS_TOTAL_WORD / TOTAL_WORD_SUM)
 
-    smoothNegTotal = NEG_TOTAL_WORD + 0.5 * (len(NEG_WORD_COUNT))
-    smoothPosTotal = POS_TOTAL_WORD + 0.5 * (len(POS_WORD_COUNT))
+    smoothNegTotal = NEG_TOTAL_WORD + smoothing * (len(NEG_WORD_COUNT))
+    smoothPosTotal = POS_TOTAL_WORD + smoothing * (len(POS_WORD_COUNT))
 
     for word in document:
         negProb += np.log10((NEG_WORD_COUNT[word] + smoothing) / smoothNegTotal)
@@ -154,7 +154,7 @@ smoothing_values = {}
 
 # while(smoothing_old < 1):
 #     smoothing_new = smoothing_old + 0.01
-#     eval_acc_new,new_pos,new_neg = compute_accuracy(classify_documents(eval_docs, smoothing = smoothing_new),eval_labels)
+#     eval_acc_new, new_pos, new_neg, err_index = compute_accuracy(classify_documents(eval_docs, smoothing = smoothing_new),eval_labels)
 #     eval_acc_old = eval_acc_new
 #     smoothing_old = smoothing_new
 #     smoothing_values[(smoothing_new)] = eval_acc_new
@@ -162,4 +162,4 @@ smoothing_values = {}
 #     print("\toverall \t" + str(eval_acc_new))
 #     print("\tpos \t\t" + str(new_pos))
 #     print("\tneg \t\t" + str(new_neg))
-#     print('Smoothing' + str(smoothing_new) + ": " + str(eval_acc_new) + ': ' + str(new_pos) + ': '+ str(new_neg))
+#     print('Smoothing ' + str(smoothing_new) + ": " + str(eval_acc_new) + ': ' + str(new_pos) + ': '+ str(new_neg), file=open('data.txt','a'))
