@@ -143,7 +143,7 @@ NEG_TOTAL_WORD, POS_TOTAL_WORD, TOTAL_WORD_SUM, NEG_WORD_COUNT, POS_WORD_COUNT =
 #print("Training set accuracy (no smoothing) : " + str(compute_accuracy(classify_documents(train_docs,smoothing=0),train_labels)))
 #print("Evaluate set accuracy (0.5) : " + str(compute_accuracy(classify_documents(eval_docs, smoothing = 0.5),eval_labels)))
 
-overall, pos, neg, err_index = compute_accuracy(classify_documents(eval_docs, smoothing=0.5), train_labels)
+overall, pos, neg, err_index = compute_accuracy(classify_documents(eval_docs, smoothing=0.5), eval_labels)
 misclassified_document(eval_docs, eval_labels, err_index)
 print("Training set accuracy (0.5) : \n\t" + "Overall accuracy : "+str(overall) + "\n\tPos accuracy : " + str(pos) + "\n\tNeg accuracy : " + str(neg))
 smoothing_old = 0
