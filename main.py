@@ -160,7 +160,8 @@ eval_acc_old = compute_accuracy(classify_documents(eval_docs, smoothing=smoothin
 eval_acc_new = 1
 
 smoothing_values = {}
-word_value(eval_docs, eval_labels)
+
+# word_value(eval_docs, eval_labels)
 # while(smoothing_old < 1):
 #     smoothing_new = smoothing_old + 0.01
 #     eval_acc_new, new_pos, new_neg, err_index = compute_accuracy(classify_documents(eval_docs, smoothing = smoothing_new),eval_labels)

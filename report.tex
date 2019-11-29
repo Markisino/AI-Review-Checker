@@ -116,7 +116,51 @@ return neg_total_word, pos_total_word,
     \texttt{max overall acc at smoothing value 0.97: 0.767}
     \section{Analysis of Misclassified Documents}
     Below you will find some misclassified documents along with some analysis on why it has been misclassified. Each team member picked 3 misclassified data as random.
-    \subsection{Thomas Analysis}
+    \subsection{Earl's Analysis}
+    \subsubsection{Review 1}
+    First analysis of review is a review that has been labelled as negative but our AI classified it as positive.
+    \begin{quotation}
+        \textit{i live in south africa where the series appeared 20 years ago.thanks to amazon i was able to relive the wonder of archie bunker where each episode provides laughs from one of the family , each of whom is brilliantly cast.i have series 3\&4 and now want 1\&2.do n't wait any longer , 24 episodes of absolute delight await you }
+
+    \end{quotation}
+    This is misclassified as training data. It's labeled as negative while speaking only positive words towards the dvd\dots
+
+    \subsubsection{Review 2}
+    This is a positive review that has been clasified as positive.
+    \begin{quotation}
+        \textit{excellent service , and the product worked extremely well . the only criticism i would have is the cost of postage . it was ridiculous , the product came in a big parcel , and inside was a dvd .}
+    \end{quotation}
+    This is a short text. It includes pretty heavy words that would be negative such as ridiculous and criticism. Cost itself is another factor and aside from the obviously positive like excellent and well, the rest can be neutral
+
+    \subsubsection{Review 3}
+    This is a negative review that has been classified as positive.
+    \begin{quotation}
+        \textit{i have worked out to denise austin for several years because i think she gives a good workout but i cannot stand her way-too-perky personality . i was very disappointed in this dance workout . the setting is fun and colorful and the music is great , but as far as a workout...this dvd really stinks . i found some of the steps somewhat confusing ( but i am not very coordinated ) . this workout was more of an " indoor walk " style workout ( like walk away the pounds w / leslie sansone , etc. ) . if you are looking for a fun way to get up and move , this may be for you . but , this is not for anyone looking for a cardio intense workout }
+    \end{quotation}
+    Despite the negative review, the person acknowledges the positive aspects of it. In this case, negative just means it doesn't work for them; not necessarily that the product is bad. Biggest offenders would be {good,colorful,fun,great}
+
+    \subsection{Marco's Analysis}
+    \subsubsection{Review 1}
+    This is a positive review that has been classified as negative.
+    \begin{quotation}
+        \textit{i luv this burberry . pple always comment anytime i wear it . my girlfriend almost made me stop wearing it cos she said anytime i wear it she feels like doing things i ca n't mention here 2 me , and since she feels tht way , other women will certainly feel like tht . i 'm getting another one ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! also fast and proper services by amazon}
+    \end{quotation}
+    Misclassified because the word \textbf{stop} was used and alot of exclamation points usually means the person is angry
+
+    \subsubsection{Review 2}
+    This is a positive review that has been classified as negative.
+    \begin{quotation}
+        \textit{i am very happy with the emjoi compact epilator that i purchased . it does exactly what it claims to do and works wonderfully . until i asked a salon for advice on the best way to remove unwanted facial hair , i did n't even know something like this exhisted . i just wish i would have known about this product years ago . a . davis}
+    \end{quotation}
+    Misclassified because the word \textbf{until} was used
+
+    \subsubsection{Review 3}
+    This is a positive review that has been classified as negative.
+    \begin{quotation}
+        \textit{i was searching for a two inch curling iron for a while . i have had so -so dealings with gold n hot in the past so i was a little nervous but i purchased this one anyway . so far , so good . it 's surprisingly light ( at least compared to my one inch ceramic tools curling iron ) . i usually let my hair air dry and use my curling irons to straighten my hair as i curl the ends ( i 'm black with a relaxer . ) i have yet to do it with this one . although i might try b / c it gets really hot . ( i usually have it on around 20-25 out of 30 ) the only problem is that the ceramic can chip off ( it happened with the first one i bought , but i returned it and got a new one that has n't chipped so far ) and it 's so big that if you take your thumb off the spring grip , it can be hard to get it back on ( i have huge hands too .}
+    \end{quotation}
+    Misclassified with negative words like \textbf{nervous} and \textbf{problem} gave it the wrong label
+    \subsection{Thomas' Analysis}
     Here is how we perform calcuation to find out the most incriming word shown below:
     $$
     \begin{aligned}
@@ -129,7 +173,7 @@ return neg_total_word, pos_total_word,
     $$
     Where SNEG and SPOS means smoothed negative and smoothed positive respectively. The x is the how impactful this value is to our formula. This formula is applied for each word in our misclassified reviews. This formula has been re-use for each of my reviews. The actual data sheet can be found at the end of the file.
     \subsubsection{Review 1}
-    My first analysis of review is a negative review that been classified as positive.
+    First analysis of review is a negative review that been classified as positive.
     \begin{quotation}
         \textit{i agree with other reviewers that it feels good and does n't smell too much , however , i 've experimented with it several times to confirm my findings , and it turns out to give me really bad blackheads . i 'm 25 with an oily t-zone and very dry facial skin . on mornings after using this cream , i have nasty blackheads on my forehead and chin . there are better products out there} 
     \end{quotation}
@@ -146,6 +190,7 @@ return neg_total_word, pos_total_word,
         \textit{\$10 bucks and does the job . you do need to adjust it every once in awhile but that 's easy to do .}
     \end{quotation}
     This review is a bit more tricky to actually find the culprit, because the highest impacting factor does favour positive classification, however, the next 3 values that are impactful are favouring negative classification, word such as \textbf{\$10}, \textbf{bucks} and \textbf{job}.
+    
     \section{Issues}
     \textcolor{red}{Issues encountered...}
     \section{What would you expand}
