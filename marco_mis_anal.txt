@@ -1,0 +1,10 @@
+Marco: Misclassified because the word "stop" was used and alot of exclamation points usually means the person is angry
+	100 - health pos 257.txt i luv this burberry . pple always comment anytime i wear it . my girlfriend almost made me stop wearing it cos she said anytime i wear it she feels like doing things i ca n't mention here 2 me , and since she feels tht way , other women will certainly feel like tht . i 'm getting another one ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! also fast and proper services by amazon
+
+
+Marco: Misclassified because the word "until" was used
+	200 - health pos 219.txt i am very happy with the emjoi compact epilator that i purchased . it does exactly what it claims to do and works wonderfully . until i asked a salon for advice on the best way to remove unwanted facial hair , i did n't even know something like this exhisted . i just wish i would have known about this product years ago . a . davis
+
+
+Marco: Misclassified with negative words like "nervous" and "problem" gave it the wrong label
+	300 - health pos 821.txt i was searching for a two inch curling iron for a while . i have had so -so dealings with gold n hot in the past so i was a little nervous but i purchased this one anyway . so far , so good . it 's surprisingly light ( at least compared to my one inch ceramic tools curling iron ) . i usually let my hair air dry and use my curling irons to straighten my hair as i curl the ends ( i 'm black with a relaxer . ) i have yet to do it with this one . although i might try b / c it gets really hot . ( i usually have it on around 20-25 out of 30 ) the only problem is that the ceramic can chip off ( it happened with the first one i bought , but i returned it and got a new one that has n't chipped so far ) and it 's so big that if you take your thumb off the spring grip , it can be hard to get it back on ( i have huge hands too .
