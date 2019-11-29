@@ -1,0 +1,10 @@
+Earl: Ok, I believe that this is misclassified as training data. It's labeled as negative while speaking only positive words towards the dvd
+	292 - dvd neg 326.txt i live in south africa where the series appeared 20 years ago.thanks to amazon i was able to relive the wonder of archie bunker where each episode provides laughs from one of the family , each of whom is brilliantly cast.i have series 3&4 and now want 1&2.do n't wait any longer , 24 episodes of absolute delight await you 
+
+
+Earl: This is a short text. It includes pretty heavy words that would be negative such as ridiculous and criticism. Cost itself is another factor and aside from the obviously positive like excellent and well, the rest can be neutral
+	169 - software pos 659.txt excellent service , and the product worked extremely well . the only criticism i would have is the cost of postage . it was ridiculous , the product came in a big parcel , and inside was a dvd . 
+
+
+Earl: Despite the negative review, the person acknowledges the positive aspects of it. In this case, negative just means it doesn't work for them; not necessarily that the product is bad. Biggest offenders would be {good,colorful,fun,great}
+	369 - dvd neg 198.txt i have worked out to denise austin for several years because i think she gives a good workout but i cannot stand her way-too-perky personality . i was very disappointed in this dance workout . the setting is fun and colorful and the music is great , but as far as a workout...this dvd really stinks . i found some of the steps somewhat confusing ( but i am not very coordinated ) . this workout was more of an " indoor walk " style workout ( like walk away the pounds w / leslie sansone , etc. ) . if you are looking for a fun way to get up and move , this may be for you . but , this is not for anyone looking for a cardio intense workout 
