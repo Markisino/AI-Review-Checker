@@ -11,6 +11,7 @@
 \usepackage{mdframed}
 \usepackage{amsmath}
 \usepackage{float}
+\usepackage{pdfpages}
 
 \definecolor{deepblue}{rgb}{0,0,0.5}
 \definecolor{deepred}{rgb}{0.6,0,0}
@@ -60,7 +61,6 @@ showstringspaces=false            %
 
 \begin{document}
     \maketitle
-
     \section{Introduction}
     This project is completed within the COMP 472 course. It aims is to create an unsupervised machine learning program that will take some people feedback on various items they purchased and to classify it in two different group: Positive review or negative review. We used 80\% of the data collected to train our machine, and the remaining 20\% to test our machine. The analysis of each task of the project are shown in different section.
     \section{Task 1 Analysis}
@@ -104,7 +104,6 @@ return neg_total_word, pos_total_word,
     $$
     
     Now this takes us to the part of of the task 2, to perform our probabilities calculation, we call the function called \pythoninline{classify_nb(document, smoothing=0.5)}, this function will call the function previously mentionned in the first part, and will get the return values of the scores for negative and positive probability. It will compares both scores, pick the highest one and will return the fitting label for our review. 
-    \newpage
     \section{Accuracy Analysis}
     We use the 0.5 smoothing for our training data and we end up with this result shown below:\\
     \newline
@@ -115,14 +114,43 @@ return neg_total_word, pos_total_word,
     
     The data above show the accuracy of our training data with a smoothing of 0.5. Below there is more datas and graphs based on the evaluation (test) data we have. The first graph show are the overall accuracy based on different smoothing values between 0.1 and 1. \\
     \texttt{max overall acc at smoothing value 0.97: 0.767}
-    \begin{figure}[h!]
-        \centering
-        \includegraphics[scale=0.5]{smoothing-average.png}
-    \end{figure}
-    
+    \section{Analysis of Misclassified Documents}
+    Below you will find some misclassified documents along with some analysis on why it has been misclassified. Each team member picked 3 misclassified data as random.
+    \subsection{Thomas Analysis}
+    Here is how we perform calcuation to find out the most incriming word shown below:
+    $$
+    \begin{aligned}
+        \text{NEG} + 0.5 &= \text{SNEG}\\
+        \text{POS} + 0.5 &= \text{SPOS}\\
+        \frac{SNEG}{SPOS} &= x\\
+        \text{IF } x > 1 &\rightarrow x\\
+        \text{ELSE } &\rightarrow \frac{1}{x}
+    \end{aligned}
+    $$
+    Where SNEG and SPOS means smoothed negative and smoothed positive respectively. The x is the how impactful this value is to our formula. This formula is applied for each word in our misclassified reviews. This formula has been re-use for each of my reviews. The actual data sheet can be found at the end of the file.
+    \subsubsection{Review 1}
+    My first analysis of review is a negative review that been classified as positive.
+    \begin{quotation}
+        \textit{i agree with other reviewers that it feels good and does n't smell too much , however , i 've experimented with it several times to confirm my findings , and it turns out to give me really bad blackheads . i 'm 25 with an oily t-zone and very dry facial skin . on mornings after using this cream , i have nasty blackheads on my forehead and chin . there are better products out there} 
+    \end{quotation}
+    After performing the calculation, the culprit are mostly the words \textbf{findings}, \textbf{mornings} since these word never appear in negative review it gives them a score of 0 (before the 0.5 smoothing), when we perform the neg/pos calculation with smoothing, it give an higher value to it. There is also the word \textbf{oily} which is strongly associated with positive review. I have compacted it for ease of view.
+    \subsubsection{Review 2}
+    This second review is a positive review that been classified as negative.
+    \begin{quotation}
+        \textit{as if this set could be anything but five stars ! ! ! barbra streisand - four of her films on their dvd debut - her own commentary - oy vey ! order it now and plan a vacation day for the day after you get delivery }
+    \end{quotation}
+    The major culprit of this review is the word \textbf{streisand} which is associated heavily with negative review. 
+    \subsubsection{Review 3}
+    This third review is a positive review that been classified as negative.
+    \begin{quotation}
+        \textit{\$10 bucks and does the job . you do need to adjust it every once in awhile but that 's easy to do .}
+    \end{quotation}
+    This review is a bit more tricky to actually find the culprit, because the highest impacting factor does favour positive classification, however, the next 3 values that are impactful are favouring negative classification, word such as \textbf{\$10}, \textbf{bucks} and \textbf{job}.
     \section{Issues}
     \textcolor{red}{Issues encountered...}
     \section{What would you expand}
     \textcolor{red}{Waht would we expand...}
-
+    \includepdf[pages=-]{review-1-data.pdf}
+    \includepdf[pages=-]{review-2-data.pdf}
+    \includepdf[pages=-]{review-3-data.pdf}
 \end{document}
