@@ -128,6 +128,15 @@ def misclassified_document(evaluation_docs, evaluation_labels, error_indexes):
 """
 MAIN
 """
+
+def word_value(document, labels):
+    #1 in data.txt is 9 in eval_docs array.
+    #11 in data.txt is 50 in eval_docs array.
+    #111 in data.txt is 547 in eval_docs array.
+    index = [9, 50, 547]
+    for word in document[index[2]]:
+        print('Word "{}" in negative: {}, in positive: {}'.format(word, NEG_WORD_COUNT[word], POS_WORD_COUNT[word]), file=open('analysis.txt', 'a'))
+        
 ### START INIT ###
 all_docs, all_labels = read_documents('all_sentiment_shuffled.txt')
 split_point = int(0.80 * len(all_docs))
@@ -151,7 +160,7 @@ eval_acc_old = compute_accuracy(classify_documents(eval_docs, smoothing=smoothin
 eval_acc_new = 1
 
 smoothing_values = {}
-
+word_value(eval_docs, eval_labels)
 # while(smoothing_old < 1):
 #     smoothing_new = smoothing_old + 0.01
 #     eval_acc_new, new_pos, new_neg, err_index = compute_accuracy(classify_documents(eval_docs, smoothing = smoothing_new),eval_labels)

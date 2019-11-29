@@ -1,0 +1,14 @@
+\contentsline {title}{COMP472 - Reports}{1}{chapter.1}% 
+\authcount {3}
+\contentsline {author}{Thomas Backs \and Marco Tropiano\and Earl Aromin Steven}{1}{chapter.1}% 
+\contentsline {section}{\numberline {1}Introduction}{3}{section.1.1}% 
+\contentsline {section}{\numberline {2}Task 1 Analysis}{3}{section.1.2}% 
+\contentsline {section}{\numberline {3}Task 2 Analysis}{3}{section.1.3}% 
+\contentsline {section}{\numberline {4}Accuracy Analysis}{4}{section.1.4}% 
+\contentsline {section}{\numberline {5}Analysis of Misclassified Documents}{4}{section.1.5}% 
+\contentsline {subsection}{\numberline {5.1}Thomas Analysis}{5}{subsection.1.5.1}% 
+\contentsline {subsubsection}{Review 1}{5}{section*.3}% 
+\contentsline {subsubsection}{Review 2}{5}{section*.4}% 
+\contentsline {subsubsection}{Review 3}{5}{section*.5}% 
+\contentsline {section}{\numberline {6}Issues}{6}{section.1.6}% 
+\contentsline {section}{\numberline {7}What would you expand}{6}{section.1.7}% 
