@@ -195,6 +195,9 @@ return neg_total_word, pos_total_word,
     \textcolor{red}{Issues encountered...}
     \section{What would you expand}
     \textcolor{red}{Waht would we expand...}
+    Obviously looking at each document word by word in isolation limits us because words are contextual. One way to improve this, but still not perfect, is to use an n-gram to look at the sequence of words. Another way to look at it is to review the surrounding words.
+
+    On the classification side, we could also split it into more labels. Aside from just positive and negative, we can include the product type being reviewed. For example, we can have dvd-pos, dvd-neg, music-pos, music-neg, health-pos, health-neg. The reasoning for this is that the type of product also gives us context clues. A quick example is the word "sick", which can be interpreted as more positive in music than in health.
     \includepdf[pages=-]{review-1-data.pdf}
     \includepdf[pages=-]{review-2-data.pdf}
     \includepdf[pages=-]{review-3-data.pdf}
