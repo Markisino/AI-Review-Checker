@@ -124,7 +124,7 @@ def compute_accuracy(predictions, labels):
 
 def misclassified_document(evaluation_docs, evaluation_labels, error_indexes):
     for x in error_indexes:
-        print('{}: {}'.format(evaluation_labels[x], evaluation_docs[x]), file=open('data.txt', 'a'))
+        print('{}: {}'.format(evaluation_labels[x], evaluation_docs[x]), file=open('data2.txt', 'a'))
 """
 MAIN
 """
@@ -135,16 +135,22 @@ def word_value(document, labels):
     #111 in data.txt is 547 in eval_docs array.
     index = [9, 50, 547]
     for word in document[index[2]]:
-        print('Word "{}" in negative: {}, in positive: {}'.format(word, NEG_WORD_COUNT[word], POS_WORD_COUNT[word]), file=open('analysis.txt', 'a'))
+        print('Word "{}" in negative: {}, in positive: {}'.format(word, NEG_WORD_COUNT[word], POS_WORD_COUNT[word]), file=open('analysis2.txt', 'a'))
         
 ### START INIT ###
 all_docs, all_labels = read_documents('all_sentiment_shuffled.txt')
 split_point = int(0.80 * len(all_docs))
 train_docs = all_docs[:split_point]
 train_labels = all_labels[:split_point]
-eval_docs = all_docs[split_point:]
-eval_labels = all_labels[split_point:]
 
+to_classify = input("Enter filename to classify (leave blank if using default test data) :")
+if(to_classify == ''):
+    eval_docs = all_docs[split_point:]
+    eval_labels = all_labels[split_point:]
+else:
+    docs,labels = read_documents(to_classify)
+    eval_docs = docs
+    eval_labels = labels   
 NEG_TOTAL_WORD, POS_TOTAL_WORD, TOTAL_WORD_SUM, NEG_WORD_COUNT, POS_WORD_COUNT = train_nb(train_docs, train_labels)
 ### END INIT ###
 
@@ -153,13 +159,15 @@ NEG_TOTAL_WORD, POS_TOTAL_WORD, TOTAL_WORD_SUM, NEG_WORD_COUNT, POS_WORD_COUNT =
 #print("Evaluate set accuracy (0.5) : " + str(compute_accuracy(classify_documents(eval_docs, smoothing = 0.5),eval_labels)))
 
 overall, pos, neg, err_index = compute_accuracy(classify_documents(eval_docs, smoothing=0.5), eval_labels)
-misclassified_document(eval_docs, eval_labels, err_index)
 print("Training set accuracy (0.5) : \n\t" + "Overall accuracy : "+str(overall) + "\n\tPos accuracy : " + str(pos) + "\n\tNeg accuracy : " + str(neg))
-smoothing_old = 0
-eval_acc_old = compute_accuracy(classify_documents(eval_docs, smoothing=smoothing_old), eval_labels)[0]
-eval_acc_new = 1
 
-smoothing_values = {}
+#misclassified_document(eval_docs, eval_labels, err_index)
+
+#smoothing_old = 0
+#eval_acc_old = compute_accuracy(classify_documents(eval_docs, smoothing=smoothing_old), eval_labels)[0]
+#eval_acc_new = 1
+#
+#smoothing_values = {}
 
 # word_value(eval_docs, eval_labels)
 # while(smoothing_old < 1):
