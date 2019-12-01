@@ -120,6 +120,8 @@ def compute_accuracy(predictions, labels):
     overall_accuracy = correct/len(predictions)
     pos_accuracy = correct_pos/total_pos
     neg_accuracy = correct_neg/total_neg
+    print("correct pos: "+ str(correct_pos) + "/"+str(total_pos))
+    print("correct neg: " +str(correct_neg) + "/"+str(total_neg))
     return overall_accuracy, pos_accuracy, neg_accuracy, error_indexes
 
 def misclassified_document(evaluation_docs, evaluation_labels, error_indexes):
@@ -157,9 +159,9 @@ NEG_TOTAL_WORD, POS_TOTAL_WORD, TOTAL_WORD_SUM, NEG_WORD_COUNT, POS_WORD_COUNT =
 #print("Evaluate set accuracy (no smoothing) : " + str(compute_accuracy(classify_documents(eval_docs,smoothing=0),eval_labels)))
 #print("Training set accuracy (no smoothing) : " + str(compute_accuracy(classify_documents(train_docs,smoothing=0),train_labels)))
 #print("Evaluate set accuracy (0.5) : " + str(compute_accuracy(classify_documents(eval_docs, smoothing = 0.5),eval_labels)))
-
-overall, pos, neg, err_index = compute_accuracy(classify_documents(eval_docs, smoothing=0.5), eval_labels)
-print("Training set accuracy (0.5) : \n\t" + "Overall accuracy : "+str(overall) + "\n\tPos accuracy : " + str(pos) + "\n\tNeg accuracy : " + str(neg))
+smoothing = 0.93
+overall, pos, neg, err_index = compute_accuracy(classify_documents(eval_docs, smoothing=smoothing), eval_labels)
+print("Prediction accuracy ("+str(smoothing)+" smoothing) : \n\t" + "Overall accuracy : "+str(overall) + "\n\tPos accuracy : " + str(pos) + "\n\tNeg accuracy : " + str(neg))
 
 #misclassified_document(eval_docs, eval_labels, err_index)
 
