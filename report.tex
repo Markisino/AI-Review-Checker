@@ -113,9 +113,10 @@ return neg_total_word, pos_total_word,
     \indent Neg accuracy : 0.906418998354103}\\
     
     The data above show the accuracy of our training data with a smoothing of 0.5. Below there is more datas and graphs based on the evaluation (test) data we have. The first graph show are the overall accuracy based on different smoothing values between 0.1 and 1. \\
-    \texttt{max overall acc at smoothing value 0.97: 0.767}
+    \texttt{max overall acc at smoothing value 0.93: 0.8120016785564415} or $81.2\%$.
     \section{Analysis of Misclassified Documents}
-    Below you will find some misclassified documents along with some analysis on why it has been misclassified. Each team member picked 3 misclassified data as random.
+    Below you will find some misclassified documents along with some analysis on why it has been misclassified. Each team member picked 3 misclassified data as random. The accuracy for our misclassified document is based on smoothing value of \textbf{0.5}.
+
     \subsection{Earl's Analysis}
     \subsubsection{Review 1}
     First analysis of review is a review that has been labelled as negative but our AI classified it as positive.
@@ -191,13 +192,14 @@ return neg_total_word, pos_total_word,
     \end{quotation}
     This review is a bit more tricky to actually find the culprit, because the highest impacting factor does favour positive classification, however, the next 3 values that are impactful are favouring negative classification, word such as \textbf{\$10}, \textbf{bucks} and \textbf{job}.
     
-    \section{Issues}
-    \textcolor{red}{Issues encountered...}
     \section{What would you expand}
     \textcolor{red}{Waht would we expand...}
     Obviously looking at each document word by word in isolation limits us because words are contextual. One way to improve this, but still not perfect, is to use an n-gram to look at the sequence of words. Another way to look at it is to review the surrounding words.
 
     On the classification side, we could also split it into more labels. Aside from just positive and negative, we can include the product type being reviewed. For example, we can have dvd-pos, dvd-neg, music-pos, music-neg, health-pos, health-neg. The reasoning for this is that the type of product also gives us context clues. A quick example is the word "sick", which can be interpreted as more positive in music than in health.
+
+    The addition of a k-fold cross validation and evaluating more than just the accuracy(we could do recall, precision, and f1 score ) to measure the performance would also be something to look at.
+
     \includepdf[pages=-]{review-1-data.pdf}
     \includepdf[pages=-]{review-2-data.pdf}
     \includepdf[pages=-]{review-3-data.pdf}
