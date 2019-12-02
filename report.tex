@@ -98,14 +98,11 @@ return neg_total_word, pos_total_word,
         score(\text{Positive}) &= \log_{10}(P(\text{Positive})) + \sum_{i=1}(P(w_i|\text{Positive})) 
     \end{aligned}
     $$
-    Then we take the scores from our formula calcuation above, and we return the exponential of positive and negative scores to make it easier to read:
-    $$
-        e^{\text{score(\text{Negative})}} \text{ and } e^{\text{score(\text{Positive})}}
-    $$
+    Then we take the scores from our formula calcuation above, and we return the negative probability and the positive probability
     
     Now this takes us to the part of of the task 2, to perform our probabilities calculation, we call the function called \pythoninline{classify_nb(document, smoothing=0.5)}, this function will call the function previously mentionned in the first part, and will get the return values of the scores for negative and positive probability. It will compares both scores, pick the highest one and will return the fitting label for our review. 
     \section{Accuracy Analysis}
-    We use the 0.5 smoothing for our training data and we end up with this result shown below:\\
+    With a 0.5 smoothing for our training data and we end up with this result shown below:\\
     \newline
     \texttt{Training set accuracy (0.5) : \\
 	\indent Overall accuracy : 0.8712621970412339\\
@@ -162,7 +159,7 @@ return neg_total_word, pos_total_word,
     \end{quotation}
     Misclassified with negative words like \textbf{nervous} and \textbf{problem} gave it the wrong label
     \subsection{Thomas' Analysis}
-    Here is how we perform calcuation to find out the most incriming word shown below:
+    Here is how I perform calculations to find out the most incriminating word shown below:
     $$
     \begin{aligned}
         \text{NEG} + 0.5 &= \text{SNEG}\\
@@ -172,7 +169,7 @@ return neg_total_word, pos_total_word,
         \text{ELSE } &\rightarrow \frac{1}{x}
     \end{aligned}
     $$
-    Where SNEG and SPOS means smoothed negative and smoothed positive respectively. The x is the how impactful this value is to our formula. This formula is applied for each word in our misclassified reviews. This formula has been re-use for each of my reviews. The actual data sheet can be found at the end of the file.
+    Where SNEG and SPOS mean smoothed negative and smoothed positive respectively. The x is how impactful this value is to our formula. This formula is applied for each word in our misclassified reviews. This formula has been re-use for each of my reviews. The actual data-sheet can be found at the end of the file.
     \subsubsection{Review 1}
     First analysis of review is a negative review that been classified as positive.
     \begin{quotation}
